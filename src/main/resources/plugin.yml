@@ -1,0 +1,4 @@
+name: DWMessages
+version: '${project.version}'
+main: org.snetwork.dwmessages.Main
+api-version: '1.16'

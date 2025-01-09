@@ -1,0 +1,36 @@
+death-message:
+  from-player:
+    - ' '
+    - '&7Вы погибли'
+    - ' &7- &fКоординаты&7: <GRADIENT:6FB617>%coordinate%</GRADIENT:6EF74D>'
+    - ' &7- &fУбийца&7: <GRADIENT:6FB617>%killer%</GRADIENT:6EF74D>'
+    - ' &7- &fС Вас выпало&7: <GRADIENT:6FB617>$%money%</GRADIENT:6EF74D>'
+    - ' '
+  from-other:
+    - ' '
+    - '&7Вы погибли'
+    - ' &7- &fКоординаты&7: <GRADIENT:6FB617>%coordinate%</GRADIENT:6EF74D>'
+    - ' &7- &fС Вас выпало&7: <GRADIENT:6FB617>$%money%</GRADIENT:6EF74D>'
+    - ' '
+respawn-title:
+  title: '&r '
+  subtitle: '&aВы возрождены'
+  sound:
+    enabled: true
+    type: ENTITY_PLAYER_LEVELUP
+    volume: 1.0
+    pitch: 1.0
+
+item-settings:
+  type: EMERALD
+  name: "&a$%money%"
+  symbol: '$'
+
+pickup:
+  message:
+    enabled: true
+    msg: "&fВы подобрали&7: <GRADIENT:6FB617>$%money%</GRADIENT:6EF74D>"
+  actionbar:
+    enabled: false
+    msg: "&a+$%money%"
+drop-percentage: 10
