@@ -25,7 +25,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class GlobalListener implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
-        event.deathMessage((Component)null);
+        event.deathMessage((Component) null);
         Player player = event.getEntity();
         Location location = player.getLocation();
         String coordinate = location.getBlockX() + ", " + location.getBlockY() + ", " + location.getBlockZ();
@@ -35,23 +35,27 @@ public class GlobalListener implements Listener {
         double balance = econ.getBalance(player);
         double dropPercentage = config.getDouble("drop-percentage") / 100.0D;
         double moneyToDrop = balance * dropPercentage;
-        econ.withdrawPlayer(player, moneyToDrop);
-        List messages;
-        if (player.getKiller() != null) {
-            messages = config.getStringList("death-message.from-player");
-        } else {
-            messages = config.getStringList("death-message.from-other");
+        if (moneyToDrop > 0) {
+
+            econ.withdrawPlayer(player, moneyToDrop);
+
+            List messages;
+            if (player.getKiller() != null) {
+                messages = config.getStringList("death-message.from-player");
+            } else {
+                messages = config.getStringList("death-message.from-other");
+            }
+
+            Iterator var15 = messages.iterator();
+
+            while (var15.hasNext()) {
+                String message = (String) var15.next();
+                message = message.replace("%coordinate%", coordinate).replace("%killer%", killerName).replace("%money%", String.format(Locale.FRANCE, "%.2f", moneyToDrop));
+                player.sendMessage(ColorUtil.format(message));
+            }
+
+            this.dropMoneyItem(location, moneyToDrop);
         }
-
-        Iterator var15 = messages.iterator();
-
-        while(var15.hasNext()) {
-            String message = (String)var15.next();
-            message = message.replace("%coordinate%", coordinate).replace("%killer%", killerName).replace("%money%", String.format(Locale.FRANCE, "%.2f", moneyToDrop));
-            player.sendMessage(ColorUtil.format(message));
-        }
-
-        this.dropMoneyItem(location, moneyToDrop);
     }
 
     @EventHandler
